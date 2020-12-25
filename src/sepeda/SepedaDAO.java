@@ -3,6 +3,7 @@ package sepeda;
 import javax.swing.JTable;
 
 public interface SepedaDAO {
+
     public void read(JTable table);
 
     public void create(Sepeda sepeda);
@@ -11,5 +12,6 @@ public interface SepedaDAO {
 
     public void delete(int id);
 
-    public void search(JTable jt,String key);
+    public void search(JTable jt, String key);
+
 }

@@ -4,8 +4,8 @@ public class Sepeda {
 
     private int id;
     private String nama;
-    private int jumlah;
     private int harga;
+    private String status;
 
     public int getId() {
         return id;
@@ -23,14 +23,6 @@ public class Sepeda {
         this.nama = nama;
     }
 
-    public int getJumlah() {
-        return jumlah;
-    }
-
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
-    }
-
     public int getHarga() {
         return harga;
     }
@@ -38,6 +30,13 @@ public class Sepeda {
     public void setHarga(int harga) {
         this.harga = harga;
     }
-    
-    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

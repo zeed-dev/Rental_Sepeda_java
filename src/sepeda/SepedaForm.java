@@ -3,60 +3,60 @@ package sepeda;
 import javax.swing.JOptionPane;
 
 public class SepedaForm extends javax.swing.JFrame {
-
+    
     private int id;
     private SepedaDAO dao;
     private int tag;
-
+    
     public SepedaForm() {
         initComponents();
         dao = new SepedaDAOImp();
         reset();
     }
-
+    
     public void reset() {
         tag = 0;
         tf_nama.setText("");
-        tf_jumlah.setText("");
+        cb_status.setSelectedIndex(0);
         tf_harga.setText("");
-
+        
         read();
     }
-
+    
     public void read() {
         dao.read(tbl_sepeda);
     }
-
+    
     public boolean validasi() {
         boolean hasil = false;
-
-        if (tf_nama.getText().isEmpty() || tf_harga.getText().isEmpty() || tf_jumlah.getText().isEmpty()) {
+        
+        if (tf_nama.getText().isEmpty() || tf_harga.getText().isEmpty()) {
             hasil = false;
         } else {
             hasil = true;
         }
         return hasil;
     }
-
+    
     public void create() {
         Sepeda sepeda = new Sepeda();
         sepeda.setNama(tf_nama.getText());
-        sepeda.setJumlah(Integer.valueOf(tf_jumlah.getText()));
+        sepeda.setStatus(cb_status.getSelectedItem().toString());
         sepeda.setHarga(Integer.valueOf(tf_harga.getText()));
-
+        
         dao.create(sepeda);
     }
-
+    
     public void update() {
         Sepeda sepeda = new Sepeda();
         sepeda.setNama(tf_nama.getText());
-        sepeda.setJumlah(Integer.valueOf(tf_jumlah.getText()));
+        sepeda.setStatus(cb_status.getSelectedItem().toString());
         sepeda.setHarga(Integer.valueOf(tf_harga.getText()));
-
+        
         sepeda.setId(id);
         dao.update(sepeda);
     }
-
+    
     public void save() {
         if (validasi() == true) {
             if (tag == 0) {
@@ -69,26 +69,26 @@ public class SepedaForm extends javax.swing.JFrame {
         }
         reset();
     }
-
+    
     public void getRecord() {
         int selected = tbl_sepeda.getSelectedRowCount();
         if (selected > 0) {
             int conf = JOptionPane.NO_OPTION;
             conf = JOptionPane.showConfirmDialog(rootPane, "Yakin ingin mengubah data?", "Confirm", JOptionPane.YES_NO_OPTION);
-
+            
             if (conf == JOptionPane.YES_OPTION) {
                 tag = 1;
                 int baris = tbl_sepeda.getSelectedRow();
                 id = Integer.valueOf(tbl_sepeda.getValueAt(baris, 0).toString());
                 tf_nama.setText(tbl_sepeda.getValueAt(baris, 1).toString());
-                tf_jumlah.setText(tbl_sepeda.getValueAt(baris, 2).toString());
+                cb_status.setSelectedItem(tbl_sepeda.getValueAt(baris, 2).toString());
                 tf_harga.setText(tbl_sepeda.getValueAt(baris, 3).toString());
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Tidak ada data yang dipilih!");
         }
     }
-
+    
     public void delete() {
         int selected = tbl_sepeda.getSelectedRowCount();
         if (selected > 0) {
@@ -106,7 +106,7 @@ public class SepedaForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Tidak ada data yang dipilih!");
         }
     }
-
+    
     public void cari() {
         if (tf_cari.getText().isEmpty()) {
             reset();
@@ -114,7 +114,7 @@ public class SepedaForm extends javax.swing.JFrame {
             dao.search(tbl_sepeda, tf_cari.getText());
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,7 +123,6 @@ public class SepedaForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tf_nama = new javax.swing.JTextField();
-        tf_jumlah = new javax.swing.JTextField();
         tf_harga = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -136,6 +135,7 @@ public class SepedaForm extends javax.swing.JFrame {
         tbl_sepeda = new javax.swing.JTable();
         tf_cari = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        cb_status = new javax.swing.JComboBox<>();
 
         jTextField1.setText("jTextField1");
 
@@ -168,7 +168,7 @@ public class SepedaForm extends javax.swing.JFrame {
         jLabel2.setText("NAMA SEPEDA");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setText("JUMLAH");
+        jLabel3.setText("STATUS");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("HARGA");
@@ -227,6 +227,8 @@ public class SepedaForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("CARI");
 
+        cb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TERSEDIA", "KLUAR" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,14 +237,24 @@ public class SepedaForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(tf_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_status, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
                                 .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,16 +262,12 @@ public class SepedaForm extends javax.swing.JFrame {
                                 .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tf_nama)
-                            .addComponent(tf_jumlah)
-                            .addComponent(tf_harga))
-                        .addGap(0, 159, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(tf_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tf_harga)))
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -273,24 +281,24 @@ public class SepedaForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_status, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,6 +364,7 @@ public class SepedaForm extends javax.swing.JFrame {
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_hapus;
     private javax.swing.JButton btn_simpan;
+    private javax.swing.JComboBox<String> cb_status;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -367,7 +376,6 @@ public class SepedaForm extends javax.swing.JFrame {
     private javax.swing.JTable tbl_sepeda;
     private javax.swing.JTextField tf_cari;
     private javax.swing.JTextField tf_harga;
-    private javax.swing.JTextField tf_jumlah;
     private javax.swing.JTextField tf_nama;
     // End of variables declaration//GEN-END:variables
 }

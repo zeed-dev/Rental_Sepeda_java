@@ -16,12 +16,12 @@ public class SepedaDAOImp implements SepedaDAO {
     private PreparedStatement ps;
     private ResultSet rs;
     private DefaultTableModel dtm;
-    private final String[] column = {"ID", "NAMA", "HARGA", "JUMLAH"};
+    private final String[] column = {"ID", "NAMA", "JUMLAH", "HARGA"};
 
     // Query
     private String view = "select * from tbl_sepeda";
-    private String insert = "insert into tbl_sepeda (nama, jumlah, harga) value (?, ?, ?)";
-    private String update = "update tbl_sepeda set nama=?, jumlah=?, harga=? where id=?";
+    private String insert = "insert into tbl_sepeda (nama, status, harga) value (?, ?, ?)";
+    private String update = "update tbl_sepeda set nama=?, status=?, harga=? where id=?";
     private String delete = "delete from tbl_sepeda where id=?";
 
     @Override
@@ -34,7 +34,7 @@ public class SepedaDAOImp implements SepedaDAO {
                 Object[] col = new Object[4];
                 col[0] = rs.getInt("id");
                 col[1] = rs.getString("nama");
-                col[2] = rs.getInt("jumlah");
+                col[2] = rs.getString("status");
                 col[3] = rs.getInt("harga");
                 dtm.addRow(col);
             }
@@ -50,7 +50,7 @@ public class SepedaDAOImp implements SepedaDAO {
         try {
             ps = con.getCon().prepareStatement(insert);
             ps.setString(1, sepeda.getNama());
-            ps.setInt(2, sepeda.getJumlah());
+            ps.setString(2, sepeda.getStatus());
             ps.setInt(3, sepeda.getHarga());
 
             ps.executeUpdate();
@@ -66,7 +66,7 @@ public class SepedaDAOImp implements SepedaDAO {
         try {
             ps = con.getCon().prepareStatement(update);
             ps.setString(1, sepeda.getNama());
-            ps.setInt(2, sepeda.getJumlah());
+            ps.setString(2, sepeda.getStatus());
             ps.setInt(3, sepeda.getHarga());
 
             ps.setString(4, String.valueOf(sepeda.getId()));
@@ -93,7 +93,7 @@ public class SepedaDAOImp implements SepedaDAO {
 
     @Override
     public void search(JTable jt, String key) {
-        String cari = "select * from tbl_sepeda WHERE nama LIKE '%" + key + "%' OR jumlah LIKE '%" + key + "%' OR harga LIKE '%" + key + "%'";
+        String cari = "select * from tbl_sepeda WHERE nama LIKE '%" + key + "%' OR status LIKE '%" + key + "%' OR harga LIKE '%" + key + "%'";
 
         try {
             dtm = new DefaultTableModel(null, column);
@@ -104,7 +104,7 @@ public class SepedaDAOImp implements SepedaDAO {
                 Object[] col = new Object[5];
                 col[0] = rs.getInt("id");
                 col[1] = rs.getString("nama");
-                col[2] = rs.getInt("jumlah");
+                col[2] = rs.getString("status");
                 col[3] = rs.getInt("harga");
 
                 dtm.addRow(col);
