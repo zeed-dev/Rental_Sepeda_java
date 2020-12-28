@@ -154,7 +154,6 @@ public class PeminjamanForm extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tf_harga = new javax.swing.JTextField();
-        btn_hitung = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -223,12 +222,6 @@ public class PeminjamanForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("CARI");
 
-        tf_nama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_namaActionPerformed(evt);
-            }
-        });
-
         tf_lama_pinjam.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_lama_pinjamKeyReleased(evt);
@@ -255,33 +248,12 @@ public class PeminjamanForm extends javax.swing.JFrame {
 
         jLabel8.setText("HARGA");
 
-        tf_harga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_hargaActionPerformed(evt);
-            }
-        });
-        tf_harga.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                tf_hargaKeyReleased(evt);
-            }
-        });
-
-        btn_hitung.setBackground(new java.awt.Color(204, 204, 255));
-        btn_hitung.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btn_hitung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/calculator-icon.png"))); // NOI18N
-        btn_hitung.setText("HITUNG");
-        btn_hitung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_hitungActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -317,10 +289,8 @@ public class PeminjamanForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(142, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,8 +323,7 @@ public class PeminjamanForm extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_cari, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,29 +345,12 @@ public class PeminjamanForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_sepedaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        create();
         save();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tf_cariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_cariKeyReleased
         cari();
     }//GEN-LAST:event_tf_cariKeyReleased
-
-    private void tf_namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_namaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_namaActionPerformed
-
-    private void btn_hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hitungActionPerformed
-
-    }//GEN-LAST:event_btn_hitungActionPerformed
-
-    private void tf_hargaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_hargaKeyReleased
-//       total();
-    }//GEN-LAST:event_tf_hargaKeyReleased
-
-    private void tf_hargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_hargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_hargaActionPerformed
 
     private void tf_lama_pinjamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_lama_pinjamKeyReleased
         if (tf_lama_pinjam.getText().isEmpty()) {
@@ -418,7 +370,6 @@ public class PeminjamanForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_hitung;
     private javax.swing.JComboBox<String> cb_sepeda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
