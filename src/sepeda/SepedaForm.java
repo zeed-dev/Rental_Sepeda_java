@@ -30,7 +30,7 @@ public class SepedaForm extends javax.swing.JFrame {
     public boolean validasi() {
         boolean hasil = false;
         
-        if (tf_nama.getText().isEmpty() || tf_harga.getText().isEmpty()) {
+        if (tf_nama.getText().isEmpty() || tf_harga.getText().isEmpty() || cb_status.getSelectedIndex() == 0) {
             hasil = false;
         } else {
             hasil = true;
@@ -227,7 +227,7 @@ public class SepedaForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("CARI");
 
-        cb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TERSEDIA", "KLUAR" }));
+        cb_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--PILIH--", "Tersedia", "Keluar" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

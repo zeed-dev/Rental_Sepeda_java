@@ -1,13 +1,32 @@
 package main;
 
+import javax.swing.JOptionPane;
+import login.LoginDAO;
+import login.LoginForm;
+import login.LoginImp;
 import user.UserForm;
 import sepeda.SepedaForm;
 import peminjaman.PeminjamanForm;
+import pengembalian.PengembalianForm;
 
 public class ViewMain extends javax.swing.JFrame {
 
+    private LoginDAO dao;
+
     public ViewMain() {
         initComponents();
+        dao = new LoginImp();
+    }
+
+    public void logout() {
+        int conf = JOptionPane.showConfirmDialog(rootPane, "Yakin untuk Logout?", "Logout?",
+                JOptionPane.YES_NO_OPTION);
+        if (conf == JOptionPane.YES_OPTION) {
+            dao.logout();
+            this.dispose();
+            new LoginForm().setVisible(true);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -20,6 +39,7 @@ public class ViewMain extends javax.swing.JFrame {
         btn_logout = new javax.swing.JButton();
         btn_ViewSepeda = new javax.swing.JButton();
         btn_ViewPeminjaman = new javax.swing.JButton();
+        btn_logout1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(595, 651));
@@ -61,6 +81,11 @@ public class ViewMain extends javax.swing.JFrame {
         btn_logout.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         btn_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout_icon-icons.com_51025.png"))); // NOI18N
         btn_logout.setText("KELUAR");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
         btn_ViewSepeda.setBackground(new java.awt.Color(204, 204, 255));
         btn_ViewSepeda.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
@@ -82,6 +107,16 @@ public class ViewMain extends javax.swing.JFrame {
             }
         });
 
+        btn_logout1.setBackground(new java.awt.Color(204, 204, 255));
+        btn_logout1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        btn_logout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Button-Refresh-icon.png"))); // NOI18N
+        btn_logout1.setText("PENGEMBALIAN");
+        btn_logout1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logout1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,7 +124,8 @@ public class ViewMain extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_logout1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_ViewSepeda, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -112,7 +148,9 @@ public class ViewMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ViewSepeda, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(btn_logout1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,8 +165,16 @@ public class ViewMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ViewSepedaActionPerformed
 
     private void btn_ViewPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ViewPeminjamanActionPerformed
-       new PeminjamanForm().setVisible(true);
+        new PeminjamanForm().setVisible(true);
     }//GEN-LAST:event_btn_ViewPeminjamanActionPerformed
+
+    private void btn_logout1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logout1ActionPerformed
+        new PengembalianForm().setVisible(true);
+    }//GEN-LAST:event_btn_logout1ActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        logout();
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     public static void main(String args[]) {
 
@@ -144,6 +190,7 @@ public class ViewMain extends javax.swing.JFrame {
     private javax.swing.JButton btn_ViewSepeda;
     private javax.swing.JButton btn_ViewUser;
     private javax.swing.JButton btn_logout;
+    private javax.swing.JButton btn_logout1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

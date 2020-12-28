@@ -10,5 +10,15 @@ public interface PeminjamanDAO {
 
     public void read(JTable table);
 
+    public void create(Peminjaman peminjaman, int id);
+
+    public void hitungJumlah(int lamaPinjam, int harga);
+
+    public void cekStatus(String nama);
+
+    public boolean jikaKeluar(String nama);
+
     public void delete(int id);
+
+    public void search(JTable jt, String key);
 }
